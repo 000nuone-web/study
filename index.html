@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>日々成長</title>
-  <style>
-    body{
-     background-image: url('webapp/translation/background.png');
-     background-size: cover;
-     background-repeat: no-repeat;
-     background-position: center center;
-     height: 100vh;
-     margin: 0;
-     font-family: sans-serif;
-     color: white;
-     text-shadow: 1px 1px 3px black;
-    }
+<style>
+  body {
+    background-image: url('webapp/translation/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+  }
 
   h1, button {
     font-family: "游明朝", "Yu Mincho", "MS 明朝", serif;
@@ -24,12 +24,20 @@
     text-decoration: none;
   }
 
+  .icon-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+
   .icon-container {
     width: 320px;
     height: 180px;
     border-radius: 20px;
     overflow: hidden;
-    margin: 0 auto 10px;
   }
 
   .icon-container img {
@@ -57,16 +65,30 @@
   }
 </style>
 
+
 </head>
 <body>
+<div style="text-align: center;">
   <h1>日々成長</h1>
+</div>
 
   <!-- アイコン表示 -->
-<div class="icon-container">
-  <a href="webapp/translation/translation.html">
-    <img src="webapp/translation/background.png" alt="アイコン">
-  </a>
+<div class="icon-row">
+  <!-- 翻訳アイコン -->
+  <div class="icon-container">
+    <a href="webapp/translation/translation.html">
+      <img src="webapp/translation/background.png" alt="翻訳アイコン">
+    </a>
+  </div>
+
+  <!-- QRコードアイコン -->
+  <div class="icon-container">
+    <a href="webapp/qrcode/qr.html">
+      <img src="webapp/qrcode/background.png" alt="QRコードアイコン">
+    </a>
+  </div>
 </div>
+
 
 </body>
 </html>
