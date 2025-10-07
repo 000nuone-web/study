@@ -8,7 +8,7 @@ canvas.height = window.innerHeight;
 const ctx = canvas.getContext("2d");
 
 const playerImg = new Image();
-playerImg.src = "asset/bbb.png";
+playerImg.src = "../asset/bbb.png";
 
 const backgroundImg = new Image();
 let stageOffsetX = 0;

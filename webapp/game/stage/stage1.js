@@ -1,4 +1,4 @@
-const stage1 = {
+export const stage1 = {
   background: "",
   obstacles: [
     // 地面ブロック（隙間あり）
@@ -7,7 +7,7 @@ const stage1 = {
       y: 364 - 64,
       width: 600,
       height: 64,
-      img: "asset/ground1.png",
+      img: "../../asset/ground1.png",
       movable: false
     },
     {
@@ -15,7 +15,7 @@ const stage1 = {
       y: 364 - 64,
       width: 150,
       height: 64,
-      img: "asset/ground1.png",
+      img: "../../asset/ground1.png",
       movable: false
     },
     {
@@ -23,7 +23,7 @@ const stage1 = {
       y: 364 - 64,
       width: 200,
       height: 64,
-      img: "asset/ground1.png",
+      img: "../../asset/ground1.png",
       movable: false
     },
 
@@ -33,7 +33,7 @@ const stage1 = {
       y: 300,
       width: 64,
       height: 64,
-      img: "asset/obstacle1.png",
+      img: "../../asset/obstacle1.png",
       movable: false
     },
 
@@ -43,7 +43,7 @@ const stage1 = {
       y: 284,
       width: 80,
       height: 80,
-      img: "asset/obstacle2.png",
+      img: "../../asset/obstacle2.png",
       movable: true,
       circle: true
     },
@@ -54,7 +54,7 @@ const stage1 = {
       y: 220,
       width: 80,
       height: 80,
-      img: "asset/obstacle3.png",
+      img: "../../asset/obstacle3.png",
       movable: true,
       circle: true,
       angle: 0,
