@@ -35,9 +35,11 @@ const rightButton = document.getElementById('rightButton');
 const jumpButton = document.getElementById('jumpButton');
 
 if (leftButton && rightButton && jumpButton) {
-  leftButton.addEventListener('touchstart', () => moveLeft = true);
-  rightButton.addEventListener('touchstart', () => moveRight = true);
-  jumpButton.addEventListener('touchstart', () => {
+leftButton.addEventListener('touchstart', () => moveLeft = true);
+leftButton.addEventListener('touchend', () => moveLeft = false);
+rightButton.addEventListener('touchstart', () => moveRight = true);
+rightButton.addEventListener('touchend', () => moveRight = false);
+jumpButton.addEventListener('touchstart', () => {
     if (!isJumping && character.position.y <= 1) {
       isJumping = true;
       velocityY = 0.2;
@@ -216,8 +218,8 @@ function animate() {
 }
 
 if (isJumping) {
-  const jumpPower = isMobileDevice() ? 0.12 : velocityY * delta * 60;
-  const gravity = isMobileDevice() ? 0.05 : 0.014 * delta * 60;
+  const jumpPower = isMobileDevice() ? velocityY * delta * 180 : velocityY * delta * 60;
+  const gravity = isMobileDevice() ? 0.014 * delta * 180 : 0.014 * delta * 60;
 
   character.position.y += jumpPower;
   velocityY -= gravity;
