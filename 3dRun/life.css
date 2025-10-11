@@ -82,10 +82,19 @@ input[type="range"] {
 }
 
 #mobileControls button {
-  font-size: 24px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 28px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  min-width: 60px;
+  min-height: 60px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid #333;
   cursor: pointer;
+  z-index: 20;
+}
+
+input[type="range"] {
+  min-width: 200px;
+  height: 40px;
+  touch-action: manipulation;
 }

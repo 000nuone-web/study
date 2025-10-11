@@ -2,14 +2,21 @@ import * as THREE from './libs/three.module.js';
 import { GLTFLoader } from './libs/GLTFLoader.js';
 import { OrbitControls } from './libs/OrbitControls.js';
 import { createCharacter, updateCharacterMovement, getCharacter, resetLane } from './character.js';
-import { loadStages, spawnStage, getObstacles, updateStages, autoSpawnStages,resetStageState } from './stageManager.js';
+import { loadStages, spawnStage, getObstacles, updateStages, autoSpawnStages, resetStageState } from './stageManager.js';
 import { checkLaserCollision } from './laser.js';
 
+// スマホ判定関数
+function isMobileDevice() {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
+// 入力状態
 let moveLeft = false;
 let moveRight = false;
+let isJumping = false;
+let velocityY = 0;
 
 const clock = new THREE.Clock();
-
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x87ceeb);
 
@@ -22,25 +29,23 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
-//ジャンプボタン
+// 操作ボタン（スマホ）
 const leftButton = document.getElementById('leftButton');
 const rightButton = document.getElementById('rightButton');
 const jumpButton = document.getElementById('jumpButton');
 
-leftButton.addEventListener('touchstart', () => moveLeft = true);
-leftButton.addEventListener('touchend', () => moveLeft = false);
+if (leftButton && rightButton && jumpButton) {
+  leftButton.addEventListener('touchstart', () => moveLeft = true);
+  rightButton.addEventListener('touchstart', () => moveRight = true);
+  jumpButton.addEventListener('touchstart', () => {
+    if (!isJumping && character.position.y <= 1) {
+      isJumping = true;
+      velocityY = 0.2;
+    }
+  });
+}
 
-rightButton.addEventListener('touchstart', () => moveRight = true);
-rightButton.addEventListener('touchend', () => moveRight = false);
-
-jumpButton.addEventListener('touchstart', () => {
-  if (!isJumping && character.position.y <= 1) {
-    isJumping = true;
-    velocityY = 0.2; // ✅ 同じジャンプ初速
-  }
-});
-
-// ライトの設定
+// ライト
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(50, 100, 50);
 directionalLight.castShadow = true;
@@ -61,13 +66,22 @@ const heartElements = document.querySelectorAll('.heart');
 const gameOverScreen = document.getElementById('gameOverScreen');
 const retryButton = document.getElementById('retryButton');
 
+// スライダー
 const speedSlider = document.getElementById('speedSlider');
 const speedValueDisplay = document.getElementById('speedValue');
+const speedSliderRetry = document.getElementById('speedSliderRetry');
+const speedValueDisplayRetry = document.getElementById('speedValueRetry');
 
-// スライダー変更時に表示を更新
-speedSlider.addEventListener('input', () => {
-  speedValueDisplay.textContent = speedSlider.value;
-});
+if (speedSlider) {
+  speedSlider.addEventListener('input', () => {
+    speedValueDisplay.textContent = speedSlider.value;
+  });
+}
+if (speedSliderRetry) {
+  speedSliderRetry.addEventListener('input', () => {
+    speedValueDisplayRetry.textContent = speedSliderRetry.value;
+  });
+}
 
 // スコア管理
 const score = { value: 0 };
@@ -75,27 +89,20 @@ function updateScoreDisplay() {
   document.getElementById('scoreDisplay').textContent = `Score: ${score.value}`;
 }
 
-
 function loseLife() {
   if (life > 0) {
     const heart = heartElements[life - 1];
-
     let blinkCount = 0;
     const blinkInterval = setInterval(() => {
       heart.style.visibility = heart.style.visibility === 'hidden' ? 'visible' : 'hidden';
       blinkCount++;
-
       if (blinkCount >= 6) {
         clearInterval(blinkInterval);
         heart.style.display = 'none';
       }
     }, 150);
-
     life--;
-
-    if (life === 0) {
-      gameOver();
-    }
+    if (life === 0) gameOver();
   }
 }
 
@@ -104,7 +111,7 @@ function gameOver() {
   gameOverScreen.style.display = 'block';
 }
 
-// ステージ管理用の変数（追加）
+// ステージ管理
 let activeStages = [];
 let obstacles = [];
 let stageCount = 0;
@@ -116,35 +123,26 @@ retryButton.addEventListener('click', () => {
     h.style.visibility = 'visible';
   });
 
-  // キャラクター状態リセット
   isHit = false;
   isInvincible = false;
   hitTimer = 0;
   blinkInterval = 0;
   character.visible = true;
   character.position.set(0, 1, 0);
-  resetLane(); // ✅ 横位置の基準を初期化
-  currentSpeed = 0; // ✅ 横方向の動きをリセット
-
-  // ✅ 横移動の入力状態もリセット
+  resetLane();
+  currentSpeed = 0;
   moveLeft = false;
   moveRight = false;
-
   camera.position.set(0, 5, 10);
- 
-  // ステージ・障害物・クイズの初期化
+
   activeStages = [];
   obstacles = [];
   stageCount = 0;
   score.value = 0;
   updateScoreDisplay();
-  
-  // クイズ関連オブジェクトを削除
+
   scene.children = scene.children.filter(obj => {
-    if (
-      obj.name === "laserObstacle" ||
-      obj.name === "quizLabel"
-    ) {
+    if (obj.name === "laserObstacle" || obj.name === "quizLabel") {
       scene.remove(obj);
       return false;
     }
@@ -159,13 +157,12 @@ retryButton.addEventListener('click', () => {
   startDelayTimer = 0;
 });
 
-
+// キャラクターと状態
 let character;
 let isHit = false;
 let isInvincible = false;
 let hitTimer = 0;
 let blinkInterval = 0;
-
 let currentSpeed = 0;
 const maxSpeed = 0.2;
 const acceleration = 0.002;
@@ -196,25 +193,34 @@ function animate() {
 
   if (waitingToStart && !gameStarted) {
     startDelayTimer += 0.05;
-
     if (startDelayTimer >= 1.0) {
       character.position.set(0, 1, 0);
       camera.position.set(0, 5, character.position.z + 10);
       gameStarted = true;
       waitingToStart = false;
     }
-
     renderer.render(scene, camera);
     return;
   }
 
-if (gameStarted) {
-  const forwardSpeed = speedSlider.value; // スライダーの値を使用
-  updateCharacterMovement(character, forwardSpeed);
-checkLaserCollision(character, scene, score, updateScoreDisplay, loseLife); // ✅ 毎フレーム判定
-}
-
   if (gameStarted) {
+    const forwardSpeed = isMobileDevice()
+      ? parseFloat(speedSliderRetry?.value || "0.8")
+      : parseFloat(speedSlider?.value || "0.8");
+
+    updateCharacterMovement(character, forwardSpeed);
+    checkLaserCollision(character, scene, score, updateScoreDisplay, loseLife);
+
+    if (isJumping) {
+      character.position.y += velocityY;
+      velocityY -= 0.014;
+      if (character.position.y <= 1) {
+        character.position.y = 1;
+        isJumping = false;
+        velocityY = 0;
+      }
+    }
+
     directionalLight.position.set(
       character.position.x + 50,
       character.position.y + 100,
@@ -222,28 +228,25 @@ checkLaserCollision(character, scene, score, updateScoreDisplay, loseLife); // �
     );
     lightTarget.position.copy(character.position);
 
-if (isHit) {
-  hitTimer += delta;
-  blinkInterval += delta;
-
-  if (blinkInterval > 0.2) {
-    character.visible = !character.visible;
-    blinkInterval = 0;
-  }
-
-  if (hitTimer <= 0.2) {
-    isInvincible = false;
-    return;
-  } else if (hitTimer <= 2.0) {
-    isInvincible = true;
-  } else {
-    isHit = false;
-    isInvincible = false;
-    hitTimer = 0;
-    character.visible = true;
-  }
-}
-
+    if (isHit) {
+      hitTimer += delta;
+      blinkInterval += delta;
+      if (blinkInterval > 0.2) {
+        character.visible = !character.visible;
+        blinkInterval = 0;
+      }
+      if (hitTimer <= 0.2) {
+        isInvincible = false;
+        return;
+      } else if (hitTimer <= 2.0) {
+        isInvincible = true;
+      } else {
+        isHit = false;
+        isInvincible = false;
+        hitTimer = 0;
+        character.visible = true;
+      }
+    }
 
     if (!isHit && !isInvincible) {
       checkCollision(character, getObstacles());
@@ -251,7 +254,6 @@ if (isHit) {
 
     updateStages(scene, character.position.z);
     autoSpawnStages(scene, character.position.z);
-
     camera.position.set(0, 6, character.position.z + 11);
   }
 
