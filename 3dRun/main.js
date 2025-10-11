@@ -216,8 +216,8 @@ function animate() {
 }
 
  if (isJumping) {
-  character.position.y += isMobileDevice()? 0.1 : velocityY * delta * 60;
-  velocityY -= isMobileDevice()? 0.05 : 0.014 * delta * 60; // 重力
+  character.position.y += isMobileDevice()? 0.05 : velocityY * delta * 60;
+  velocityY -= isMobileDevice()? 0.02 : 0.014 * delta * 60; // 重力
   if (character.position.y <= 1) {
     character.position.y = 1;
     isJumping = false;
@@ -248,8 +248,8 @@ if (moveRight) {
     lightTarget.position.copy(character.position);
 
     if (isHit) {
-      hitTimer += isMobileDevice() ? 0.04 :delta;
-      blinkInterval += isMobileDevice() ? 0.04 :delta;
+      hitTimer += isMobileDevice() ? 0.07 :delta;
+      blinkInterval += isMobileDevice() ? 0.07 :delta;
       if (blinkInterval > 0.2) {
         character.visible = !character.visible;
         blinkInterval = 0;
