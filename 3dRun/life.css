@@ -1,0 +1,91 @@
+/* ライフ表示 */
+#lifeContainer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.heart {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  visibility: visible;
+}
+
+/* スタート画面 */
+#startScreen {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  border-radius: 10px;
+  z-index: 20;
+  text-align: center;
+}
+
+#startButton {
+  font-size: 24px;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+/* ゲームオーバー画面 */
+#gameOverScreen {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 40px;
+  text-align: center;
+  border-radius: 10px;
+  z-index: 20;
+}
+
+/* スコア表示 */
+#scoreDisplay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  color: white;
+  z-index: 10;
+}
+
+/* スピードスライダー（スタート・リスタート画面） */
+#speedControl,
+#speedControlRetry {
+  margin-top: 10px;
+  font-size: 18px;
+  color: white;
+}
+
+input[type="range"] {
+  width: 200px;
+  margin-top: 5px;
+}
+
+#mobileControls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+}
+
+#mobileControls button {
+  font-size: 24px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}

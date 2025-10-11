@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>QRコード生成ツール</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #qrcode {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>QRコード生成ツール</h1>
+  <div class="input-group">
+    <input type="text" id="urlInput" placeholder="URLを入力してください">
+    <button onclick="generateQRCode()">作成</button>
+  </div>
+  <div id="qrcode"></div>
+
+  <!-- QRコード生成ライブラリ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    function generateQRCode() {
+      const url = document.getElementById("urlInput").value.trim();
+      const qrContainer = document.getElementById("qrcode");
+      qrContainer.innerHTML = ""; // 以前のQRコードを消去
+
+      if (url !== "") {
+        new QRCode(qrContainer, {
+          text: url,
+          width: 400,
+          height: 400
+        });
+      } else {
+        alert("URLを入力してください");
+      }
+    }
+  </script>
+<div style="margin-top: 30px;">
+  <a href="../../index.html">
+    <button>ホームに戻る</button>
+  </a>
+</div>
+</body>
+</html>
