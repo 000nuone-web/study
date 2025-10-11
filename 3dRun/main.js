@@ -221,15 +221,13 @@ function animate() {
   }
 }
 
-const baseSpeed = 0.2; // 最大速度
-const accel = 0.004;   // 加速度
+const instantSpeed = 0.3; // 一瞬で動く速度（調整可能）
 
 if (moveLeft) {
-  currentSpeed = Math.min(currentSpeed + accel * delta * 60, baseSpeed);
-  character.position.x -= currentSpeed * delta * 60;
-} else if (moveRight) {
-  currentSpeed = Math.min(currentSpeed + accel * delta * 60, baseSpeed);
-  character.position.x += currentSpeed * delta * 60;
+  character.position.x -= instantSpeed;
+}
+if (moveRight) {
+  character.position.x += instantSpeed;
 } else {
   currentSpeed = 0;
 }
