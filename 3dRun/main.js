@@ -211,9 +211,9 @@ function animate() {
     updateCharacterMovement(character, forwardSpeed);
     checkLaserCollision(character, scene, score, updateScoreDisplay, loseLife);
 
-  if (isJumping) {
+ if (isJumping) {
   character.position.y += velocityY * delta * 60;
-  velocityY -= 0.014 * delta * 60;
+  velocityY -= 0.014 * delta * 60; // 重力
   if (character.position.y <= 1) {
     character.position.y = 1;
     isJumping = false;
@@ -221,15 +221,19 @@ function animate() {
   }
 }
 
+const baseSpeed = 0.2; // 最大速度
+const accel = 0.004;   // 加速度
+
 if (moveLeft) {
-  character.position.x -= currentSpeed;
-  currentSpeed = Math.min(currentSpeed + acceleration, maxSpeed);
+  currentSpeed = Math.min(currentSpeed + accel * delta * 60, baseSpeed);
+  character.position.x -= currentSpeed * delta * 60;
 } else if (moveRight) {
-  character.position.x += currentSpeed;
-  currentSpeed = Math.min(currentSpeed + acceleration, maxSpeed);
+  currentSpeed = Math.min(currentSpeed + accel * delta * 60, baseSpeed);
+  character.position.x += currentSpeed * delta * 60;
 } else {
   currentSpeed = 0;
 }
+
 
     directionalLight.position.set(
       character.position.x + 50,
