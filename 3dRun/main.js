@@ -216,7 +216,7 @@ function animate() {
 }
 
  if (isJumping) {
-  character.position.y += isMobileDevice()? 200 : velocityY * delta * 60;
+  character.position.y += isMobileDevice()? 0.4 : velocityY * delta * 60;
   velocityY -= 0.014 * delta * 60; // 重力
   if (character.position.y <= 1) {
     character.position.y = 1;
@@ -227,7 +227,7 @@ function animate() {
 
 
 
-const instantSpeed = isMobileDevice() ? 1 : 0.3;
+const instantSpeed = isMobileDevice() ? 0.8 : 0.3;
 
 
 if (moveLeft) {
