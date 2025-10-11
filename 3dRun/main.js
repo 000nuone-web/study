@@ -215,16 +215,19 @@ function animate() {
   return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }
 
- if (isJumping) {
-  character.position.y += isMobileDevice()? 0.05 : velocityY * delta * 60;
-  velocityY -= isMobileDevice()? 0.02 : 0.014 * delta * 60; // 重力
+if (isJumping) {
+  const jumpPower = isMobileDevice() ? 0.12 : velocityY * delta * 60;
+  const gravity = isMobileDevice() ? 0.05 : 0.014 * delta * 60;
+
+  character.position.y += jumpPower;
+  velocityY -= gravity;
+
   if (character.position.y <= 1) {
     character.position.y = 1;
     isJumping = false;
     velocityY = 0;
   }
 }
-
 
 
 const instantSpeed = isMobileDevice() ? 0.8 : 0.3;
