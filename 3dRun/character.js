@@ -25,6 +25,21 @@ export function createCharacter(scene) {
 export function getCharacter() {
   return character;
 }
+export function triggerJump(initialVelocity = 0.38) {
+  if (!isJumping && character.position.y <= 1) {
+    velocityY = initialVelocity;
+    isJumping = true;
+  }
+}
+
+export function moveLaneLeft() {
+  if (lane > -1) lane--;
+}
+
+export function moveLaneRight() {
+  if (lane < laneCount - 2) lane++;
+}
+
 
 document.addEventListener('keydown', (e) => {
   if (e.code === 'Space' && !isJumping) {
