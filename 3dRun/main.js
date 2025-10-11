@@ -211,15 +211,25 @@ function animate() {
     updateCharacterMovement(character, forwardSpeed);
     checkLaserCollision(character, scene, score, updateScoreDisplay, loseLife);
 
-    if (isJumping) {
-      character.position.y += velocityY;
-      velocityY -= 0.014;
-      if (character.position.y <= 1) {
-        character.position.y = 1;
-        isJumping = false;
-        velocityY = 0;
-      }
-    }
+  if (isJumping) {
+  character.position.y += velocityY * delta * 60;
+  velocityY -= 0.014 * delta * 60;
+  if (character.position.y <= 1) {
+    character.position.y = 1;
+    isJumping = false;
+    velocityY = 0;
+  }
+}
+
+if (moveLeft) {
+  character.position.x -= currentSpeed;
+  currentSpeed = Math.min(currentSpeed + acceleration, maxSpeed);
+} else if (moveRight) {
+  character.position.x += currentSpeed;
+  currentSpeed = Math.min(currentSpeed + acceleration, maxSpeed);
+} else {
+  currentSpeed = 0;
+}
 
     directionalLight.position.set(
       character.position.x + 50,
