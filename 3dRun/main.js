@@ -211,8 +211,12 @@ function animate() {
     updateCharacterMovement(character, forwardSpeed);
     checkLaserCollision(character, scene, score, updateScoreDisplay, loseLife);
 
+    function isMobileDevice() {
+  return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
  if (isJumping) {
-  character.position.y += velocityY * delta * 60;
+  character.position.y += isMobileDevice()? 200 : velocityY * delta * 60;
   velocityY -= 0.014 * delta * 60; // 重力
   if (character.position.y <= 1) {
     character.position.y = 1;
@@ -221,7 +225,10 @@ function animate() {
   }
 }
 
-const instantSpeed = 0.3; // 一瞬で動く速度（調整可能）
+
+
+const instantSpeed = isMobileDevice() ? 1 : 0.3;
+
 
 if (moveLeft) {
   character.position.x -= instantSpeed;
