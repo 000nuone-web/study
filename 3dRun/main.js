@@ -237,8 +237,8 @@ function animate() {
   }
 
   if (isJumping) {
-    const jumpPower = isMobileDevice() ? velocityY * delta * 150 : velocityY * delta * 60;
-    const gravity = isMobileDevice() ? 0.014 * delta * 150 : 0.014 * delta * 60;
+    const jumpPower = isMobileDevice() ? velocityY * delta * 120 : velocityY * delta * 60;
+    const gravity = isMobileDevice() ? 0.014 * delta * 120 : 0.014 * delta * 60;
 
     character.position.y += jumpPower;
     velocityY -= gravity;
@@ -250,7 +250,7 @@ function animate() {
     }
   }
 
-  const instantSpeed = isMobileDevice() ? 0.8 : 0.3;
+  const instantSpeed = isMobileDevice() ? 0.7 : 0.3;
 
   if (moveLeft) {
     character.position.x -= instantSpeed;
@@ -269,8 +269,8 @@ function animate() {
   lightTarget.position.copy(character.position);
 
   if (isHit) {
-    hitTimer += isMobileDevice() ? delta * 150 : delta;
-    blinkInterval += isMobileDevice() ? delta * 150 : delta;
+    hitTimer += isMobileDevice() ? delta * 120 : delta;
+    blinkInterval += isMobileDevice() ? delta * 120 : delta;
     if (blinkInterval > 0.2) {
       character.visible = !character.visible;
       blinkInterval = 0;
@@ -307,22 +307,26 @@ function checkCollision(character, obstacles) {
   for (const obj of obstacles) {
     const objBox = new THREE.Box3().setFromObject(obj);
     if (charBox.intersectsBox(objBox)) {
-      const dz = character.position.z - obj.position.z;
-      const dx = character.position.x - obj.position.x;
-      const pushZ = dz > 0 ? 1.0 : -1.0;
-      const pushX = dx > 0 ? 0.5 : -0.5;
+  if (isHit || isInvincible) return; // ← これで多重ヒット防止
 
-      character.position.z += pushZ;
-      character.position.x += pushX;
+  const dz = character.position.z - obj.position.z;
+  const dx = character.position.x - obj.position.x;
+  const pushZ = dz > 0 ? 1.0 : -1.0;
+  const pushX = dx > 0 ? 0.5 : -0.5;
 
-      isHit = true;
-      hitTimer = 0;
-      blinkInterval = 0;
-      character.visible = false;
+  character.position.z += pushZ;
+  character.position.x += pushX;
 
-      loseLife();
-      break;
-    }
+  isHit = true;
+  isInvincible = true; // ← ここで即無敵にする
+  hitTimer = 0;
+  blinkInterval = 0;
+  character.visible = false;
+
+  loseLife();
+  break;
+}
+
   }
 }
 

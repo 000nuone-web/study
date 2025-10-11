@@ -80,101 +80,17 @@ input[type="range"] {
   touch-action: manipulation;
 }
 
-/* モバイル操作ボタン */
-#mobileControls {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 20px;
-  z-index: 10;
-}
-
-#mobileControls button {
-  font-size: 28px;
-  padding: 16px 24px;
-  border-radius: 12px;
-  min-width: 60px;
-  min-height: 60px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 2px solid #333;
-  cursor: pointer;
-  z-index: 20;
-}
-
-/* スマホ横画面対応 */
-@media screen and (max-width: 768px) and (orientation: landscape) {
-  body {
-    font-size: 16px;
-  }
-
-  canvas {
-    width: 100vw;
-    height: 100vh;
-  }
-
-  #startScreen,
-  #gameOverScreen {
-    width: 80vw;
-    padding: 20px;
-    font-size: 16px;
-  }
-
-  #startButton,
-  #retryButton {
-    font-size: 20px;
-    padding: 8px 20px;
-  }
-
-  #scoreDisplay {
-    font-size: 20px;
-    top: 5px;
-    left: 5px;
-  }
-
-  #lifeContainer {
-    top: 5px;
-    right: 5px;
-    gap: 6px;
-  }
-
-  .heart {
-    width: 30px;
-    height: 30px;
-  }
-
-  #mobileControls {
-    bottom: 10px;
-    gap: 10px;
-  }
-
-  #mobileControls button {
-    font-size: 24px;
-    padding: 12px 18px;
-    min-width: 50px;
-    min-height: 50px;
-  }
-
-  #speedControl,
-  #speedControlRetry {
-    font-size: 16px;
-  }
-
-  input[type="range"] {
-    width: 160px;
-    height: 30px;
-  }
-
-/* スマホ用：左右ボタンを左下に寄せる */
+/* モバイル操作ボタン（←→を左下、JUMPを右下） */
 #leftButton,
 #rightButton {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   left: 20px;
-  font-size: 28px;
+  font-size: 40px;
+   width: 100px;
+  height: 100px;
   padding: 16px 24px;
-  border-radius: 12px;
+  border-radius: 10px;
   min-width: 60px;
   min-height: 60px;
   background-color: rgba(255, 255, 255, 0.9);
@@ -183,26 +99,28 @@ input[type="range"] {
   z-index: 20;
 }
 
-/* → ボタンは ← ボタンの右に並べる */
 #rightButton {
-  left: 100px;
+  left: 140px;
 }
 
-/* ジャンプボタンを右下に寄せて2倍サイズに */
 #jumpButton {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 20px;
-  font-size: 56px;
-  padding: 32px 48px;
-  border-radius: 16px;
-  min-width: 120px;
-  min-height: 120px;
+  width: 150px;
+  height: 150px;
+  font-size: 40px;
+  border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.95);
   border: 3px solid #333;
   cursor: pointer;
   z-index: 20;
-}
 
+  /* 中央に文字を配置 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  /* padding はゼロにすることで円形を保つ */
+  padding: 0;
 }
