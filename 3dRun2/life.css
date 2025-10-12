@@ -1,0 +1,163 @@
+/* ライフ表示 */
+#lifeContainer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.heart {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  visibility: visible;
+}
+
+/* スタート画面 */
+#startScreen {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  border-radius: 10px;
+  z-index: 20;
+  text-align: center;
+}
+
+#startButton {
+  font-size: 24px;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+/* ゲームオーバー画面 */
+#gameOverScreen {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 40px;
+  text-align: center;
+  border-radius: 10px;
+  z-index: 20;
+}
+
+#retryButton {
+  font-size: 24px;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+/* スコア表示 */
+#scoreDisplay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  color: white;
+  z-index: 10;
+}
+
+/* スピードスライダー（スタート・リスタート画面） */
+#speedControl,
+#speedControlRetry {
+  margin-top: 10px;
+  font-size: 18px;
+  color: white;
+}
+
+input[type="range"] {
+  width: 200px;
+  margin-top: 5px;
+  min-width: 200px;
+  height: 40px;
+  touch-action: manipulation;
+}
+
+/* モバイル操作ボタン（←→を左下、JUMPを右下） */
+#leftButton,
+#rightButton {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-size: 40px;
+   width: 100px;
+  height: 100px;
+  padding: 16px 24px;
+  border-radius: 10px;
+  min-width: 60px;
+  min-height: 60px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 2px solid #333;
+  cursor: pointer;
+  z-index: 20;
+}
+
+#rightButton {
+  left: 140px;
+}
+
+#jumpButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 150px;
+  height: 150px;
+  font-size: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 3px solid #333;
+  cursor: pointer;
+  z-index: 20;
+
+  /* 中央に文字を配置 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* padding はゼロにすることで円形を保つ */
+  padding: 0;
+}
+
+.selected {
+  background-color: #4caf50;
+  color: white;
+  border: 2px solid #fff;
+}
+#tagSelector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2列に並べる */
+  gap: 15px;
+  margin-top: 20px;
+  justify-items: center;
+}
+
+.rangeButton {
+  width: 160px;
+  height: 80px;
+  font-size: 16px;
+  background-color: #ffffff;
+  color: #333;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.rangeButton:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.rangeButton.selected {
+  background-color: #28a745;
+  color: white;
+  border-color: #28a745;
+}

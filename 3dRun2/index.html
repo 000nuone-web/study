@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>3dRun</title>
+  <link rel="stylesheet" href="./life.css" />
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      touch-action: manipulation;
+      overscroll-behavior: contain;
+      background: url('./background.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: sans-serif;
+      color: white;
+    }
+
+    
+    canvas {
+      display: block;
+    }
+
+    #startScreen {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+    }
+
+    #tagSelector button,
+    #startButton,
+    #speedControl input {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #startButton {
+      background-color: #28a745;
+      color: white;
+    }
+
+    #speedControl {
+      margin-top: 10px;
+    }
+
+    #speedSlider {
+      width: 150px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- スコア表示（左上） -->
+<div id="scoreDisplay">Score: 0</div>
+
+  <!-- ライフ表示 -->
+  <div id="lifeContainer" style="position: absolute; top: 10px; right: 10px;">
+    <img class="heart" src="./assets/heart.png" alt="ライフ" width="32" height="32">
+    <img class="heart" src="./assets/heart.png" alt="ライフ" width="32" height="32">
+    <img class="heart" src="./assets/heart.png" alt="ライフ" width="32" height="32">
+  </div>
+
+  <!-- スタート画面 -->
+  <div id="startScreen">
+    <h2>範囲を選んでください</h2>
+    <div id="tagSelector">
+      <button class="rangeButton" data-tag="D1">30°, 45°, 60°</button>
+      <button class="rangeButton" data-tag="D12">0°〜180°</button>
+      <button class="rangeButton" data-tag="D34">180°〜360°</button>
+      <button class="rangeButton" data-tag="D360">0°〜360°</button>
+    </div>
+
+    <div id="speedControl">
+      <label for="speedSlider">スピード: <span id="speedValue">0.6</span></label><br>
+      <input type="range" id="speedSlider" min="0.5" max="1.5" step="0.1" value="0.6">
+    </div>
+
+    <button id="startButton">スタート</button>
+  </div>
+
+<div id="gameOverScreen" style="display: none;">
+  <h2>ゲームオーバー</h2>
+  <button id="retryButton">リトライ</button>
+</div>
+
+
+  <!-- メインスクリプト -->
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
