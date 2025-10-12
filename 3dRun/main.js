@@ -24,6 +24,16 @@ function isMobileDevice() {
   return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 }
 
+// スマホ操作ボタンの有効/無効切り替え
+function setMobileControlsEnabled(enabled) {
+  const buttons = [leftButton, rightButton, jumpButton];
+  buttons.forEach(btn => {
+    if (btn) btn.disabled = !enabled;
+  });
+}
+
+
+
 // 入力状態
 let moveLeft = false;
 let moveRight = false;
@@ -133,6 +143,7 @@ function loseLife() {
 function gameOver() {
   gameStarted = false;
   gameOverScreen.style.display = 'block';
+  setMobileControlsEnabled(false); // ← ゲームオーバー時に無効化
 }
 
 // ステージ管理
@@ -145,7 +156,12 @@ retryButton.addEventListener('click', () => {
   heartElements.forEach(h => {
     h.style.display = 'inline-block';
     h.style.visibility = 'visible';
+    setMobileControlsEnabled(true); // ← 再スタート時に有効化
   });
+
+  // ジャンプ状態のリセット
+  isJumping = false;
+  velocityY = 0;
 
   isHit = false;
   isInvincible = false;
@@ -200,6 +216,7 @@ document.getElementById('startButton').addEventListener('click', () => {
   waitingToStart = true;
   startDelayTimer = 0;
   document.getElementById('startScreen').style.display = 'none';
+  setMobileControlsEnabled(true); // ← ゲーム開始時に有効化
 });
 
 async function main() {
@@ -248,7 +265,7 @@ function animate() {
     }
   }
 
-  const baseSpeed = isMobileDevice() ? 0.5 : 0.3;
+  const baseSpeed = isMobileDevice() ? 0.45 : 0.3;
   const instantSpeed = baseSpeed * delta * 60;
 
   if (moveLeft) {
