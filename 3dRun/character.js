@@ -50,7 +50,7 @@ document.addEventListener('keydown', (e) => {
   if (e.code === 'ArrowRight' && lane < laneCount -2) lane++;
 });
 
-export function updateCharacterMovement(character, forwardSpeed = 0.8) {
+export function updateCharacterMovement(character, forwardSpeed = 0.6) {
   character.position.z -= parseFloat(forwardSpeed); // 前進速度
 
   // ジャンプ処理

@@ -64,7 +64,7 @@ if (leftButton && rightButton && jumpButton) {
   jumpButton.addEventListener('touchstart', () => {
     if (!isJumping && character.position.y <= 1) {
       isJumping = true;
-      velocityY = isMobileDevice() ? 0.6 : 0.38;
+      velocityY = isMobileDevice() ? 0.5 : 0.38;
     }
   });
 }
@@ -188,8 +188,6 @@ let isInvincible = false;
 let hitTimer = 0;
 let blinkInterval = 0;
 let currentSpeed = 0;
-const maxSpeed = 0.2;
-const acceleration = 0.002;
 
 const STAGE_INTERVAL = 100;
 const stage0EndZ = -STAGE_INTERVAL;
@@ -229,8 +227,8 @@ function animate() {
 
   if (gameStarted) {
     const forwardSpeed = isMobileDevice()
-      ? parseFloat(speedSliderRetry?.value || "0.8")
-      : parseFloat(speedSlider?.value || "0.8");
+      ? parseFloat(speedSliderRetry?.value || "0.6")
+      : parseFloat(speedSlider?.value || "0.6");
 
     updateCharacterMovement(character, forwardSpeed);
     checkLaserCollision(character, scene, score, updateScoreDisplay, loseLife);
@@ -250,7 +248,8 @@ function animate() {
     }
   }
 
-  const instantSpeed = isMobileDevice() ? 0.7 : 0.3;
+  const baseSpeed = isMobileDevice() ? 0.5 : 0.3;
+  const instantSpeed = baseSpeed * delta * 60;
 
   if (moveLeft) {
     character.position.x -= instantSpeed;
