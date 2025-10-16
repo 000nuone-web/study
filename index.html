@@ -5,7 +5,7 @@
   <title>お試し</title>
 <style>
   body {
-    background-image: url('translation/background.png');
+    background-image: url('background.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -24,21 +24,21 @@
     text-decoration: none;
   }
 
-  .icon-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-  }
+.icon-row {
+  display: grid;
+  grid-template-columns: repeat(2, 400px); /* 横に2つ、幅固定 */
+  justify-content: center; /* グリッド全体を中央に配置 */
+  gap: 40px 60px; /* 縦40px、横60pxの隙間 */
+  margin-top: 40px;
+  padding: 0 20px;
+}
 
-  .icon-container {
-    width: 320px;
-    height: 180px;
-    border-radius: 20px;
-    overflow: hidden;
-  }
+.icon-container {
+  width: 400px; /* サイズを少し大きく */
+  height: 220px;
+  border-radius: 20px;
+  overflow: hidden;
+}
 
   .icon-container img {
     width: 100%;
@@ -74,27 +74,22 @@
 
   <!-- アイコン表示 -->
 <div class="icon-row">
-  <!-- 翻訳アイコン -->
   <div class="icon-container">
     <a href="translation/translation.html">
-      <img src="translation/background.png" alt="翻訳アイコン">
+      <img src="translation/translation.png" alt="翻訳アイコン">
     </a>
   </div>
-
-  <!-- QRコードアイコン -->
   <div class="icon-container">
-    <a href="webapp/qrcode/qr.html">
-      <img src="qrcode/background.png" alt="QRコードアイコン">
+    <a href="qrcode/qr.html">
+      <img src="qrcode/qr.png" alt="QRコードアイコン">
     </a>
   </div>
-</div>
-
-  <!-- gameアイコン -->
   <div class="icon-container">
     <a href="3dRun2/index.html">
-      <img src="3dRun2/background.png" alt="QRコードアイコン">
+      <img src="3dRun2/3drun2.png" alt="ゲームアイコン">
     </a>
   </div>
+  <!-- 追加アイコンもこの中にどんどん入れてOK -->
 </div>
 
 </body>
