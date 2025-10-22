@@ -29,6 +29,26 @@ function createLaserSquare(color) {
     group.add(line);
   }
 
+  //縦の棒
+  const poleGeometry = new THREE.BoxGeometry(0.2, height, 0.2);
+const poleMaterial = new THREE.MeshStandardMaterial({
+  color: 0xffd700,           // 黄金色！
+  metalness: 1,              // 金属感MAX
+  roughness: 0.05,           // つるつる光沢
+  emissive: 0xffcc00,        // ほんのり金色の輝き
+  emissiveIntensity: 0.3     // 光らせる
+});
+
+
+
+  const leftPole = new THREE.Mesh(poleGeometry, poleMaterial);
+  leftPole.position.set(-width / 2, 1.5, 0);
+  group.add(leftPole);
+
+  const rightPole = new THREE.Mesh(poleGeometry, poleMaterial);
+  rightPole.position.set(width / 2, 1.5, 0);
+  group.add(rightPole);
+
   return group;
 }
 

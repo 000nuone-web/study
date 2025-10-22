@@ -1,31 +1,28 @@
 import * as THREE from './libs/three.module.js';
-import { GLTFLoader } from './libs/GLTFLoader.js';
-import { OrbitControls } from './libs/OrbitControls.js';
+
 import {
   lane,
   laneCount,
   createCharacter,
   updateCharacterMovement,
-  resetLane,
   moveLaneLeft,
   moveLaneRight,
   triggerJump,
   updateJump,
   getIsJumping,
   setIsJumping,
-  setVelocity
 } from './character.js';
 import {
   loadStages,
   spawnStage,
   getObstacles,
   updateStages,
-  autoSpawnStages,
-  resetStageState
+  autoSpawnStages
 } from './stageManager.js';
 import { checkLaserCollision } from './laser.js';
-import { getFilteredQuiz } from './quizUtil.js';
-import { placeLaserTriplet } from './laser.js';
+
+import { mixers } from './stageManager.js';
+
 
 // スマホ判定
 function isMobileDevice() {
@@ -55,6 +52,7 @@ let selectedTag = "D360";
 let gameStarted = false;
 let waitingToStart = false;
 let startDelayTimer = 0;
+let selectedCourse = "calmCourse"; // 初期値（静コース）
 let isHit = false;
 let isInvincible = false;
 let hitTimer = 0;
@@ -104,9 +102,9 @@ const rightButton = document.getElementById('rightButton');
 const jumpButton = document.getElementById('jumpButton');
 
 // ステージ管理
-let activeStages = [];
-let obstacles = [];
-let stageCount = 0;
+// let activeStages = [];
+// let obstacles = [];
+// let stageCount = 0;
 
 // スコア表示
 const score = { value: 0 };
@@ -188,6 +186,17 @@ document.querySelectorAll('.rangeButton').forEach(btn => {
   });
 });
 
+// 🔽 ここに追加（静／動コースの選択処理）
+document.querySelectorAll('.courseButton').forEach(btn => {
+  btn.addEventListener('click', () => {
+    selectedCourse = btn.id; // "calmCourse" or "activeCourse"
+    document.querySelectorAll('.courseButton').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+});
+
+
+
 // スタートボタン処理
 if (startButton) {
   startButton.addEventListener('click', () => {
@@ -214,7 +223,7 @@ if (retryButton) {
 // メイン処理
 async function main() {
   character = createCharacter(scene);
-  await loadStages();
+  await loadStages(selectedCourse);
   for (let i = 0; i < 5; i++) spawnStage(scene, selectedTag);
   animate();
 }
@@ -223,6 +232,8 @@ async function main() {
 function animate() {
   requestAnimationFrame(animate);
   const delta = clock.getDelta();
+
+mixers.forEach(mixer => mixer.update(delta));
 
   if (waitingToStart && !gameStarted) {
     startDelayTimer += 0.05;

@@ -14,58 +14,84 @@ let stageCount = 0;
 const STAGE_DEPTH = 100;
 const STAGE_INTERVAL = 100;
 
-export async function loadStages() {
+export const mixers = []; 
+export const stageModelGLTFs = []; 
+
+export async function loadStages(selectedCourse) {
   // 最初のステージ（固定）
   const startGltf = await loader.loadAsync('./stage/stageStart.glb');
   stageStartModel = startGltf.scene;
 
   // ランダムステージ
-  const paths = [
-    './stage/stage1.glb',
-    './stage/stage2.glb',
-    './stage/stage3.glb'
-  ];
+  // 🔽 静／動コースに応じてステージを選ぶ
+  let paths = [];
+
+  if (selectedCourse === "calmCourse") {
+    paths = [
+      './stage/stage1.glb',
+      './stage/stage2.glb',
+      './stage/stage3.glb',
+    ];
+  } else {
+    paths = [
+      './stage/stage1.glb',
+      './stage/stage2.glb',
+      './stage/stage3.glb',
+      './stage/stage4.glb',
+    ];
+  }
 
   for (const path of paths) {
     const gltf = await loader.loadAsync(path);
     stageModels.push(gltf.scene);
+    stageModelGLTFs.push(gltf); 
   }
 }
 
 export function spawnStage(scene, selectedTag) {
   let model;
+  let randomIndex = -1; // 初期化しておく
 
-  if (stageCount === 0) {
+if (stageCount === 0) {
     model = stageStartModel.clone();
   } else {
-    const randomIndex = Math.floor(Math.random() * stageModels.length);
+    randomIndex = Math.floor(Math.random() * stageModels.length);
     model = stageModels[randomIndex].clone();
-    model.visible = true;
+
   }
 
   const stageZ = -stageCount * STAGE_INTERVAL;
   model.position.z = stageZ;
   stageCount++;
 
-  model.visible = true;
+  scene.add(model);
 
-   scene.add(model);
+model.traverse(obj => {
+  if (obj.name.includes('move')) {
+    const mixer = new THREE.AnimationMixer(obj);
+    const originalGltf = stageModelGLTFs[randomIndex];
+    originalGltf.animations.forEach(clip => {
+      const action = mixer.clipAction(clip);
+      action.play();
+    });
+    mixers.push(mixer);
+  }
+});
+
   model.traverse(obj => {
     if (obj.isMesh) {
       obj.castShadow = true;
       obj.receiveShadow = true;
       obj.visible = true;
 
-      if (obj.name === "ground" && obj.material && obj.material.color) {
-        obj.material.color.set(0x228B22);
-      }
-
       const worldPos = new THREE.Vector3();
       obj.getWorldPosition(worldPos);
+       
 
+      // 衝突判定用に obstacle を登録
       if (
         obj.name &&
-        (obj.name.includes("Wall") || obj.name.includes("obstacle")) &&
+        (obj.name.includes("Wall") || obj.name.includes("obstacle")|| obj.name.includes("move")) &&
         obj.name !== "ground" &&
         !(Math.abs(worldPos.x - 0) < 0.1 && Math.abs(worldPos.z - 0) < 0.1)
       ) {
@@ -77,15 +103,15 @@ export function spawnStage(scene, selectedTag) {
   activeStages.push(model);
 
   // ✅ ステージ終端にクイズを出す
-const filtered = getFilteredQuiz(selectedTag);
-if (!filtered || filtered.length === 0) {
-  return; // クイズを出さずに終了
+  const filtered = getFilteredQuiz(selectedTag);
+  if (!filtered || filtered.length === 0) {
+    return; // クイズを出さずに終了
+  }
+  const quizItem = filtered[Math.floor(Math.random() * filtered.length)];
+  const quizZ = stageZ + STAGE_INTERVAL - 50;
+  placeLaserTriplet(scene, quizZ, quizItem);
 }
-const quizItem = filtered[Math.floor(Math.random() * filtered.length)];
-const quizZ = stageZ + STAGE_INTERVAL-50;
-placeLaserTriplet(scene, quizZ, quizItem);
 
-}
 
 
 export function updateStages(scene, cameraZ) {

@@ -26,7 +26,7 @@ export function resetLane() {
 
 export function createCharacter(scene) {
   const geometry = new CapsuleGeometry(0.5, 1.5, 4, 8);
-  const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+ const material = new THREE.MeshStandardMaterial({ color: new THREE.Color(0, 0.8, 0) });
   character = new THREE.Mesh(geometry, material);
   character.castShadow = true;
   character.position.set(0, 1, 0);

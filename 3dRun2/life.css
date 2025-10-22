@@ -18,7 +18,7 @@
 /* スタート画面 */
 #startScreen {
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.8);
@@ -29,10 +29,16 @@
 }
 
 #startButton {
-  font-size: 24px;
-  padding: 10px 30px;
+  font-size: 18px;
+  padding: 10px 10px;
   cursor: pointer;
+  margin-top: 30px;
+  background-color: #0d41d0; /* 青 */
+  color: white;
+  border: 2px solid #007bff;
+  border-radius: 10px;
 }
+
 
 /* ゲームオーバー画面 */
 #gameOverScreen {
@@ -135,7 +141,7 @@ input[type="range"] {
 }
 
 .selected {
-  background-color: #4caf50;
+  background-color: #db09bc;
   color: white;
   border: 2px solid #fff;
 }
@@ -166,7 +172,60 @@ input[type="range"] {
 }
 
 .rangeButton.selected {
-  background-color: #28a745;
+  background-color: #0fb052;
   color: white;
-  border-color: #28a745;
+  border-color:  #0fb052;
+}
+
+.courseButton.selected {
+  background-color: #17bebe;
+  color: white;
+  border-color: #17bebe;
+}
+
+#courseSelector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2列に並べる */
+  gap: 30px;
+  margin-top: 10px;
+  justify-items: center;
+}
+
+.courseButton {
+  width: 120px;
+  height: 50px;
+  font-size: 16px;
+  background-color: #ffffff;
+  color: #333;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.courseButton:hover {
+  transform: scale(1.05);
+}
+
+/* スライダーのつまみ（WebKit系ブラウザ） */
+input[type="range"]::-webkit-slider-thumb {
+  background-color: #f4c2c2; /* 肌色系（薄ピンクベージュ） */
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Firefox用 */
+input[type="range"]::-moz-range-thumb {
+  background-color: #f4c2c2;
+  border: 1px solid #aaa;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
