@@ -87,7 +87,7 @@ input[type="range"] {
 }
 
 #controlButtons {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -98,7 +98,7 @@ input[type="range"] {
 /* モバイル操作ボタン（←→を左下、JUMPを右下） */
 #leftButton,
 #rightButton {
-  position: absolute;
+  position: fixed;
   font-size: 32px;
    width: 80px;
   height: 80px;
@@ -115,19 +115,19 @@ input[type="range"] {
 #leftButton {
   position:fixed;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
 }
 
 #rightButton {
   position: fixed;
   bottom: 20px;
-  left: 120px;
+  right: 120px;
 }
 
 #jumpButton {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  left: 20px;
 }
 
 #jumpButton {
