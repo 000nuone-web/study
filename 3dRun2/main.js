@@ -213,6 +213,10 @@ if (startButton) {
   });
 }
 
+export function getCurrentSpeed() {
+  return currentSpeed;
+}
+
 // リトライ処理
 if (retryButton) {
   retryButton.addEventListener('click', () => {

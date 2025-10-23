@@ -1,7 +1,7 @@
 import * as THREE from './libs/three.module.js';
 import { getShuffledChoices } from './quizUtil.js';
-import { quiz } from './quiz.js';
 import { createTextSpriteWithBoard } from './textSprite.js';
+import { getCurrentSpeed } from './main.js';
 
 // レーザーのビジュアルを作成
 function createLaserSquare(color) {
@@ -105,7 +105,7 @@ export function checkLaserCollision(character, scene, score, updateScoreDisplay,
         obj.userData.hasCollided = true;
 
         if (obj.userData.isCorrect) {
-          score.value += 10;
+          score.value += 100 * getCurrentSpeed()-20; // スピードに応じて得点変化
           updateScoreDisplay();
         } else {
           loseLife();
