@@ -181,7 +181,7 @@ if (leftButton && rightButton && jumpButton) {
     if (!character) return;
     if (!getIsJumping() && character.position.y <= 1) {
       setIsJumping(true);
-      setVelocityY(isMobileDevice() ? 0.5 : 0.28);
+      setVelocityY(isMobileDevice() ? 0.5 : 0.20);
     }
   });
 }
