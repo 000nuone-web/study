@@ -16,7 +16,7 @@ export function setIsJumping(value) {
 isJumping = value;
 }
 
-export function setVelocity(value) {
+export function setVelocityY(value) {
 velocityY = value;
 }
 
