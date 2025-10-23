@@ -114,9 +114,9 @@ input[type="range"] {
   z-index: 20;
 }
 
-#rightButton {
+/* #rightButton {
   left: 110px;
-}
+} */
 
 #jumpButton {
   position: fixed;
@@ -130,12 +130,10 @@ input[type="range"] {
   border: 3px solid #333;
   cursor: pointer;
   z-index: 20;
-
   /* 中央に文字を配置 */
   display: flex;
   align-items: center;
   justify-content: center;
-
   /* padding はゼロにすることで円形を保つ */
   padding: 0;
 }

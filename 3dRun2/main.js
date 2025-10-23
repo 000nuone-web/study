@@ -170,16 +170,18 @@ function setMobileControlsEnabled(enabled) {
 // 操作ボタンイベント
 if (leftButton && rightButton && jumpButton) {
   leftButton.addEventListener('touchstart', () => {
-    if (lane > -1) lane--;
+    //if (lane > -1) lane--;
+    moveLaneLeft(); //追加した***
   });
   rightButton.addEventListener('touchstart', () => {
-    if (lane < laneCount - 2) lane++;
+    // if (lane < laneCount - 2) lane++;
+    moveLaneRight(); //追加した***
   });
   jumpButton.addEventListener('touchstart', () => {
     if (!character) return;
     if (!getIsJumping() && character.position.y <= 1) {
       setIsJumping(true);
-      setVelocityY(isMobileDevice() ? 0.5 : 0.38);
+      setVelocityY(isMobileDevice() ? 0.5 : 0.28);
     }
   });
 }
