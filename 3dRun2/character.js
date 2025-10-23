@@ -37,7 +37,7 @@ export function createCharacter(scene) {
 export function updateJump(character, delta, isMobile) {
   if (!isJumping) return;
 
-  const jumpPower = isMobile ? velocityY * delta * 58 : velocityY * delta * 80;
+  const jumpPower = isMobile ? velocityY * delta * 60 : velocityY * delta * 80;
   const gravity = isMobile ? 0.014 * delta * 60 : 0.014 * delta * 40;
 
   character.position.y += jumpPower;
