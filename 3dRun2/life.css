@@ -88,9 +88,9 @@ input[type="range"] {
 
 #controlButtons {
   position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* bottom: 20px; */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
   display: none; /* ← 最初は非表示 */
   z-index: 1000;
 }
@@ -115,13 +115,13 @@ input[type="range"] {
 #leftButton {
   position:fixed;
   bottom: 20px;
-  right: 20px;
+  right: 120px;
 }
 
 #rightButton {
   position: fixed;
   bottom: 20px;
-  right: 120px;
+  right: 20px;
 }
 
 #jumpButton {
