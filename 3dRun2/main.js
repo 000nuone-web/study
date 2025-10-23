@@ -199,8 +199,8 @@ document.querySelectorAll('.rangeButton').forEach(btn => {
     document.querySelectorAll('.rangeButton').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
   });
-    btn.addEventListener('click', handler);
-    btn.addEventListener('touchstart', handler); // ✅ スマホ対応
+    // btn.addEventListener('click', handler);
+    // btn.addEventListener('touchstart', handler); // ✅ スマホ対応
 });
 
 // 🔽 ここに追加（静／動コースの選択処理）
@@ -210,8 +210,8 @@ document.querySelectorAll('.courseButton').forEach(btn => {
     document.querySelectorAll('.courseButton').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
   });
-    btn.addEventListener('click', handler);
-    btn.addEventListener('touchstart', handler); // ✅ スマホ対応
+    // btn.addEventListener('click', handler);
+    // btn.addEventListener('touchstart', handler); // ✅ スマホ対応
 });
 
 
