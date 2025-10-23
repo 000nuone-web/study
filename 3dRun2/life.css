@@ -101,9 +101,9 @@ input[type="range"] {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  font-size: 40px;
-   width: 100px;
-  height: 100px;
+  font-size: 32px;
+   width: 80px;
+  height: 80px;
   padding: 16px 24px;
   border-radius: 10px;
   min-width: 60px;
@@ -115,16 +115,16 @@ input[type="range"] {
 }
 
 #rightButton {
-  left: 140px;
+  left: 110px;
 }
 
 #jumpButton {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 150px;
-  height: 150px;
-  font-size: 40px;
+  width: 120px;
+  height: 120px;
+  font-size: 32px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.95);
   border: 3px solid #333;

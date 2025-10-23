@@ -11,6 +11,7 @@ import {
   updateJump,
   getIsJumping,
   setIsJumping,
+  setVelocityY
 } from './character.js';
 import {
   loadStages,
@@ -151,8 +152,7 @@ setMobileControlsEnabled(false);
 
 }
 
-
-//**********************************
+//***********スマホで動作***********************
 
 function setMobileControlsEnabled(enabled) {
   const controlPanel = document.getElementById("controlButtons");
@@ -166,7 +166,6 @@ function setMobileControlsEnabled(enabled) {
 }
 
 //**********************************上に追加
-
 
 // 操作ボタンイベント
 if (leftButton && rightButton && jumpButton) {
