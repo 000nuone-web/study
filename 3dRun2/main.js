@@ -74,6 +74,12 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 
+// 背景テクスチャの読み込み
+const loader = new THREE.TextureLoader();
+loader.load('./3drun2.png', texture => {
+  scene.background = texture;
+});
+
 // ライト
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(50, 100, 50);
