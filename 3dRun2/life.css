@@ -88,9 +88,6 @@ input[type="range"] {
 
 #controlButtons {
   position: fixed;
-  /* bottom: 20px; */
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
   display: none; /* ← 最初は非表示 */
   z-index: 1000;
 }
@@ -127,7 +124,7 @@ input[type="range"] {
 #jumpButton {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 10px;
 }
 
 #jumpButton {
