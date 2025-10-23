@@ -3,7 +3,7 @@ import { CapsuleGeometry } from './libs/CapsuleGeometry.js';
 
 export let lane = 0; //初期レーン数
 export const laneCount = 3;
-const laneOffset = 20; //レーン間の距離
+//const laneOffset = 20; //レーン間の距離
 let velocityY = 0;
 let isJumping = false;
 let character;

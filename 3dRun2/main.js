@@ -151,12 +151,22 @@ setMobileControlsEnabled(false);
 
 }
 
-// スマホ操作ボタンの有効化
+
+//**********************************
+
 function setMobileControlsEnabled(enabled) {
+  const controlPanel = document.getElementById("controlButtons");
+  if (controlPanel) {
+    controlPanel.style.display = enabled ? "block" : "none";
+  }
+
   [leftButton, rightButton, jumpButton].forEach(btn => {
     if (btn) btn.disabled = !enabled;
   });
 }
+
+//**********************************上に追加
+
 
 // 操作ボタンイベント
 if (leftButton && rightButton && jumpButton) {
@@ -212,7 +222,13 @@ if (startButton) {
     }
     currentSpeed = parseFloat(speedSlider?.value || "0.6");
     document.getElementById('startScreen').style.display = 'none';
-    setMobileControlsEnabled(true);
+    //setMobileControlsEnabled(true);
+    
+        // ✅ スマホだけで操作ボタンを表示
+    if (isMobileDevice()) {
+      setMobileControlsEnabled(true);
+    }
+    
     waitingToStart = true;
     startDelayTimer = 0;
     if (!character) main();
