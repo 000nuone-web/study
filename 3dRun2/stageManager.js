@@ -57,7 +57,6 @@ if (stageCount === 0) {
   } else {
     randomIndex = Math.floor(Math.random() * stageModels.length);
     model = stageModels[randomIndex].clone();
-
   }
 
   const stageZ = -stageCount * STAGE_INTERVAL;
@@ -111,8 +110,6 @@ model.traverse(obj => {
   const quizZ = stageZ + STAGE_INTERVAL - 50;
   placeLaserTriplet(scene, quizZ, quizItem);
 }
-
-
 
 export function updateStages(scene, cameraZ) {
   for (let i = activeStages.length - 1; i >= 0; i--) {

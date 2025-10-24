@@ -21,9 +21,7 @@ import {
   autoSpawnStages
 } from './stageManager.js';
 import { checkLaserCollision } from './laser.js';
-
 import { mixers } from './stageManager.js';
-
 
 // スマホ判定
 function isMobileDevice() {
@@ -149,11 +147,9 @@ startDelayTimer = 0;
 
 // 操作ボタンを無効化（スマホ用）
 setMobileControlsEnabled(false);
-
 }
 
 //***********スマホで動作***********************
-
 function setMobileControlsEnabled(enabled) {
   const controlPanel = document.getElementById("controlButtons");
   if (controlPanel) {
@@ -164,7 +160,6 @@ function setMobileControlsEnabled(enabled) {
     if (btn) btn.disabled = !enabled;
   });
 }
-
 //**********************************上に追加
 
 // 操作ボタンイベント
@@ -193,7 +188,6 @@ if (speedSlider) {
   });
 }
 
-
 // 範囲選択（スタート画面）
 document.querySelectorAll('.rangeButton').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -216,8 +210,6 @@ document.querySelectorAll('.courseButton').forEach(btn => {
     // btn.addEventListener('touchstart', handler); // ✅ スマホ対応
 });
 
-
-
 // スタートボタン処理
 if (startButton) {
   startButton.addEventListener('click', () => {
@@ -227,8 +219,7 @@ if (startButton) {
     }
     currentSpeed = parseFloat(speedSlider?.value || "0.6");
     document.getElementById('startScreen').style.display = 'none';
-    //setMobileControlsEnabled(true);
-    
+ 
         // ✅ スマホだけで操作ボタンを表示
     if (isMobileDevice()) {
       setMobileControlsEnabled(true);
@@ -283,7 +274,6 @@ mixers.forEach(mixer => mixer.update(delta));
   updateJump(character, delta, isMobileDevice());
   checkLaserCollision(character, scene, score, updateScoreDisplay, loseLife);
   }
-
 
   const baseSpeed = isMobileDevice() ? 0.45 : 0.3;
   const instantSpeed = baseSpeed * delta * 60;
@@ -357,7 +347,8 @@ function checkCollision(character, obstacles) {
       character.visible = false;
 
       loseLife();
-      break;
+      //break;
+      return;
     }
   }
 }

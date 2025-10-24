@@ -39,8 +39,6 @@ const poleMaterial = new THREE.MeshStandardMaterial({
   emissiveIntensity: 0.3     // 光らせる
 });
 
-
-
   const leftPole = new THREE.Mesh(poleGeometry, poleMaterial);
   leftPole.position.set(-width / 2, 1.5, 0);
   group.add(leftPole);
