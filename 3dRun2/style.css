@@ -236,7 +236,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* 横画面対応レイアウト */
-@media screen and (max-width: 768px) and (orientation: landscape) {
+@media screen and (max-width: 900px) and (orientation: landscape) {
   /* スマホの横向きにだけ適用されるスタイル */
 
   #startScreen {
