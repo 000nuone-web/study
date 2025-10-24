@@ -234,3 +234,60 @@ input[type="range"]::-moz-range-thumb {
   height: 20px;
   cursor: pointer;
 }
+
+/* 横画面対応レイアウト */
+@media screen and (orientation: landscape) {
+  #startScreen {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    width: 90vw;
+    max-width: 1000px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  #tagSelector,
+  #courseSelector {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .rangeButton,
+  .courseButton {
+    width: 20vw;
+    height: 10vh;
+    font-size: 2vh;
+  }
+
+  #speedControl {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  #speedSlider {
+    width: 40vw;
+  }
+
+  #startButton {
+    font-size: 2vh;
+    padding: 10px 20px;
+    margin-top: 10px;
+    width: 30vw;
+    height: 8vh;
+  }
+}
