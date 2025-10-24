@@ -270,7 +270,7 @@ input[type="range"]::-moz-range-thumb {
 
   .rangeButton {
     width: 18vw;
-    height: 8vh;
+    height: 16vh;
     font-size: 2vh;
   }
 
@@ -284,7 +284,7 @@ input[type="range"]::-moz-range-thumb {
 
   .courseButton {
     width: 18vw;
-    height: 6vh;
+    height: 12vh;
     font-size: 2vh;
   }
 
@@ -293,7 +293,7 @@ input[type="range"]::-moz-range-thumb {
     flex-direction: column;
     align-items: center;
     gap: 5px;
-    margin-top: 10px;
+    margin-top: 5px;
   }
 
   #speedSlider {
@@ -310,6 +310,6 @@ input[type="range"]::-moz-range-thumb {
     font-size: 2vh;
     padding: 10px 20px;
     width: 25vw;
-    height: 6vh;
+    height: 12vh;
   }
 }
