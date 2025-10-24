@@ -293,8 +293,8 @@ mixers.forEach(mixer => mixer.update(delta));
   lightTarget.position.copy(character.position);
 
   if (isHit) {
-    hitTimer += isMobileDevice() ? delta * 120 : delta;
-    blinkInterval += isMobileDevice() ? delta * 120 : delta;
+    hitTimer +=  delta;
+    blinkInterval += delta;
     if (blinkInterval > 0.2) {
       character.visible = !character.visible;
       blinkInterval = 0;
