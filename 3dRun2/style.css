@@ -250,7 +250,10 @@ input[type="range"]::-moz-range-thumb {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    gap: 20px;
+    gap: 0px;
+  }
+  #startScreen h2 {
+    margin: 0;
   }
 
   /* 範囲選択ラベル */
@@ -261,20 +264,21 @@ input[type="range"]::-moz-range-thumb {
   }
 
   #tagSelector {
+    margin: 0;
     display: grid;
+    position: relative;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    gap: 9px;
     width: 100%;
     justify-items: center;
   }
 
-  .rangeButton {
-    position: absolute;
-    top:30%;
+  .rangeButton {    
+    margin: 0;
     align-items: center;
-    width: 18vw;
+    width: 20vw;
     height: 16vh;
-    font-size: 2vh;
+    font-size: 1vh;
   }
 
   #courseSelector {
@@ -282,11 +286,9 @@ input[type="range"]::-moz-range-thumb {
     flex-direction: row;
     justify-content: center;
     gap: 20px;
-    margin-top: 10px;
   }
 
   .courseButton {
-    position: absolute;
     top:80%;
     left:20px;
     width: 18vw;
@@ -295,32 +297,30 @@ input[type="range"]::-moz-range-thumb {
   }
 
   #speedControl {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 5px;
-    margin-top: 5px;
+    gap: 0;
+    margin-top: 0;
   }
 
+  #speedControl input {
+    margin: 0;
+    padding: 0;
+  } 
+
   #speedSlider {
-    position: absolute;
-    top:60%;
     align-items: center;
     width: 40vw;
     height: 30px;
+    margin: 0;
+    padding: 0;
   }
 
   #speedValue {
-    position: absolute;
-    top:40%;
     align-items: center;
     font-size: 6vh;
   }
 
   #startButton {
-    position: absolute;
-    top:80%;
-    right:40px;
     margin-top: 10px;
     font-size: 6vh;
     padding: 10px 20px;
