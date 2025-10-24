@@ -111,19 +111,19 @@ input[type="range"] {
 
 #leftButton {
   position:fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 15px;
+  left: 15px;
 }
 
 #rightButton {
   position: fixed;
-  bottom: 20px;
-  left: 120px;
+  bottom: 15px;
+  left: 105px;
 }
 
 #jumpButton {
   position: fixed;
-  bottom: 20px;
+  bottom: 15px;
   right: 10px;
 }
 
