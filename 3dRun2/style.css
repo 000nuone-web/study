@@ -283,9 +283,12 @@ input[type="range"]::-moz-range-thumb {
   }
 
   .courseButton {
+    position: absolute;
+    top:80%;
+    left:10px;
     width: 18vw;
     height: 12vh;
-    font-size: 2vh;
+    font-size: 6vh;
   }
 
   #speedControl {
@@ -297,15 +300,24 @@ input[type="range"]::-moz-range-thumb {
   }
 
   #speedSlider {
+    position: absolute;
+    top:40%;
+    left:10px;
     width: 40vw;
     height: 30px;
   }
 
   #speedValue {
-    font-size: 2vh;
+    position: absolute;
+    top:40%;
+    left:10px;
+    font-size: 6vh;
   }
 
   #startButton {
+    position: absolute;
+    top:80%;
+    right:40px;
     margin-top: 10px;
     font-size: 2vh;
     padding: 10px 20px;
