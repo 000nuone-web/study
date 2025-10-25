@@ -21,19 +21,19 @@ export const quiz = [
     question: "sin 0°",
     correct: "c1",
     wrong: ["c2", "c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14"],
-    tags:["D1","D12","D360"]
+    tags:["D12","D360"]
   },
   {
     question: "cos 0°",
     correct: "c3",
     wrong: ["c1", "c2", "c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14"],
-    tags:["D1","D12","D360"]
+    tags:["D12","D360"]
   },
   {
     question: "tan 0°",
     correct: "c1",
     wrong: ["c2", "c3","c4","c5","c6","c7","c8","c9","c10","c11","c12","c13","c14"],
-    tags:["D1","D12","D360"]
+    tags:["D12","D360"]
   },
     {
     question: "sin 30°",
