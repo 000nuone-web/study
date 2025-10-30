@@ -103,7 +103,7 @@ export function checkLaserCollision(character, scene, score, updateScoreDisplay,
         obj.userData.hasCollided = true;
 
         if (obj.userData.isCorrect) {
-          score.value += 100 * getCurrentSpeed()-20; // スピードに応じて得点変化
+          score.value += 10 + 50 * (getCurrentSpeed()-0.3); // スピードに応じて得点変化
           updateScoreDisplay();
         } else {
           loseLife();
