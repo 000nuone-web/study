@@ -75,7 +75,7 @@ document.body.appendChild(renderer.domElement);
 
 // 背景テクスチャの読み込み
 const loader = new THREE.TextureLoader();
-loader.load('./3drun2.png', texture => {
+loader.load('./assets/background.png', texture => {
   scene.background = texture;
 });
 
