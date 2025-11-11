@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>円周上の三角形</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="controls">
+      <div class="control">
+        <label class="value">半径</label>
+        <div class="value"><span id="radius-val">4.0</span></div>
+        <input id="radius" type="range" min="0.1" max="10" step="0.1" value="5" />
+        <label for="radius">(0.1〜10):</label>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="layout">
+      <!-- 左側：盤面 -->
+      <div class="board-wrap">
+        <svg id="board" viewBox="0 0 1000 1000">
+          <circle id="circle" class="circle" cx="500" cy="500" r="400" />
+          <path id="edge" class="tri-edge" />
+
+          <g id="A-group">
+            <circle id="A" class="vertex" r="8" />
+            <text id="A-label" class="label" text-anchor="middle" dy="-14">A</text>
+          </g>
+          <g id="B-group">
+            <circle id="B" class="vertex" r="8" />
+            <text id="B-label" class="label" text-anchor="middle" dy="-14">B</text>
+          </g>
+          <g id="C-group">
+            <circle id="C" class="vertex" r="8" />
+            <text id="C-label" class="label" text-anchor="middle" dy="-14">C</text>
+          </g>
+
+          <circle id="center" class="center" cx="500" cy="500" r="4" />
+        </svg>
+      </div>
+
+      <!-- 右側：情報パネル -->
+      <aside class="info-panel">
+        <h2>値</h2>
+        <ul>
+          <li><i>a</i> = <span id="val-a">0</span></li>
+          <li><i>b</i> = <span id="val-b">0</span></li>
+          <li><i>c</i> = <span id="val-c">0</span></li>
+          <li><i>A</i> = <span id="val-A">0</span>°</li>
+          <li><i>B</i> = <span id="val-B">0</span>°</li>
+          <li><i>C</i> = <span id="val-C">0</span>°</li>
+          <li>R = <span id="val-R">0</span></li>
+          <li>sin<i>A</i> = <span id="val-sinA">0</span></li>
+          <li>sin<i>B</i> = <span id="val-sinB">0</span></li>
+          <li>sin<i>C</i> = <span id="val-sinC">0</span></li>
+          <li>cos<i>A</i> = <span id="val-cosA">0</span></li>
+          <li>cos<i>B</i> = <span id="val-cosB">0</span></li>
+          <li>cos<i>C</i> = <span id="val-cosC">0</span></li>
+          <li>tan<i>A</i> = <span id="val-tanA">0</span></li>
+          <li>tan<i>B</i> = <span id="val-tanB">0</span></li>
+          <li>tan<i>C</i> = <span id="val-tanC">0</span></li>
+        </ul>
+      </aside>
+       <div class="hint">小数点以下を四捨五入している部分もあるため多少の数値の誤差はあります</div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
