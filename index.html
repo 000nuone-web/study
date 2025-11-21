@@ -24,21 +24,21 @@
     text-decoration: none;
   }
 
-.icon-row {
-  display: grid;
-  grid-template-columns: repeat(2, 400px); /* 横に2つ、幅固定 */
-  justify-content: center; /* グリッド全体を中央に配置 */
-  gap: 40px 60px; /* 縦40px、横60pxの隙間 */
-  margin-top: 40px;
-  padding: 0 20px;
-}
+  .icon-row {
+    display: grid;
+    grid-template-columns: repeat(2, 400px); /* 横に2つ、幅固定 */
+    justify-content: center; /* グリッド全体を中央に配置 */
+    gap: 40px 60px; /* 縦40px、横60pxの隙間 */
+    margin-top: 40px;
+    padding: 0 20px;
+  }
 
-.icon-container {
-  width: 400px; /* サイズを少し大きく */
-  height: 220px;
-  border-radius: 20px;
-  overflow: hidden;
-}
+  .icon-container {
+    width: 400px; /* サイズを少し大きく */
+    height: 220px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
 
   .icon-container img {
     width: 100%;
@@ -64,38 +64,51 @@
     background-color: #45a049;
   }
 </style>
-
-
 </head>
 <body>
-<div style="text-align: center;">
-  <h1>お試し</h1>
-</div>
+  <div style="text-align: center;">
+  </div>
 
-  <!-- アイコン表示 -->
-<div class="icon-row">
-  <div class="icon-container">
-    <a href="translation/translation.html">
-      <img src="translation/translation.png" alt="翻訳アイコン">
-    </a>
+  <!-- 上のグループ：数学など -->
+  <div style="text-align: center; margin-top: 60px;">
+    <h2>数学</h2>
+    </div>
+    <div class="icon-row">  
+      <div class="icon-container">
+       <a href="3dRun2/index.html">
+        <img src="3dRun2/assets/3dRun2.png" alt="ゲームアイコン">
+       </a>
+      </div>
+      <div class="icon-container">
+       <a href="Law-of-Sines/index.html">
+        <img src="Law-of-Sines/Law-of-Sines.png" alt="三角法アイコン">
+       </a>
+     </div>
+    </div>
+    <!-- 他の数学系アイコンがあればここに追加 -->
   </div>
-  <div class="icon-container">
-    <a href="qrcode/qr.html">
-      <img src="qrcode/qr.png" alt="QRコードアイコン">
-    </a>
-  </div>
-  <div class="icon-container">
-    <a href="3dRun2/index.html">
-      <img src="3dRun2/assets/3dRun2.png" alt="ゲームアイコン">
-    </a>
-  </div>
-  <!-- 追加アイコンもこの中にどんどん入れてOK -->
-     <div class="icon-container">
-    <a href="Law-of-Sines/index.html">
-      <img src="Law-of-Sines/Law-of-Sines.png" alt="ゲームアイコン">
-    </a>
-  </div>
-</div>
 
+  <!-- 下のグループ：便利ツールなど -->
+  <div style="text-align: center; margin-top: 60px;">
+    <h2>便利ツール</h2>
+  </div>
+  <div class="icon-row">
+    <div class="icon-container">
+      <a href="translation/translation.html">
+        <img src="translation/translation.png" alt="翻訳アイコン">
+      </a>
+    </div>
+    <div class="icon-container">
+      <a href="qrcode/qr.html">
+        <img src="qrcode/qr.png" alt="QRコードアイコン">
+      </a>
+    </div>
+    <div class="icon-container">
+      <a href="pdf-merge/index.html">
+        <img src="pdf-merge/pdf-merger.png" alt="QRコードアイコン">
+      </a>
+    </div>
+  </div>
 </body>
+
 </html>
