@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>PDF結合ツール（最大20ファイル）</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>PDFファイル結合ツール（最大20ファイル）</h2>
+  <div id="fileInputs"></div>
+  <button id="mergeBtn">選択されたPDFを結合してダウンロード</button>
+  <div id="loading" style="display:none;">結合中... しばらくお待ちください 🍄</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+</script>
+
+
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
