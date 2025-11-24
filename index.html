@@ -22,26 +22,27 @@
 
   h2 {
     font-family: "游明朝", "Yu Mincho", "MS 明朝", serif;
-    font-size: 43px;
+    font-size: 35px;
   }
 
   a {
     text-decoration: none;
   }
 
-  .icon-row {
-    display: grid;
-    grid-template-columns: repeat(2, 400px); /* 横に2つ、幅固定 */
-    justify-content: center; /* グリッド全体を中央に配置 */
-    gap: 40px 60px; /* 縦40px、横60pxの隙間 */
-    margin-top: 40px;
-    padding: 0 20px;
-  }
+ .icon-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* ← 自動調整で収まりやすく */
+  justify-content: center;
+  gap: 30px 40px; /* ← 隙間も少し狭く */
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px; /* ← 横幅を制限して中央に収める */
+}
 
   .icon-container {
-    width: 400px; /* サイズを少し大きく */
-    height: 220px;
-    border-radius: 20px;
+    width: 240px; /* サイズを少し大きく */
+    height: 150px;
+    border-radius: 12px;
     overflow: hidden;
   }
 
@@ -68,52 +69,91 @@
   button:hover {
     background-color: #45a049;
   }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50% 50%;
+  height: 100vh;
+}
+
+.grid-item {
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#empty {
+  /* 左下は空白 */
+}
+
+
 </style>
 </head>
 <body>
   <div style="text-align: center;">
   </div>
 
-  <!-- 上のグループ：数学など -->
-  <div style="text-align: center; margin-top: 60px;">
+  <div class="grid-container">
+  <!-- 左上：数学 -->
+  <div class="grid-item" id="math">
     <h2>〜 数学 〜</h2>
-    </div>
-    <div class="icon-row">  
+    <div class="icon-row">
+      <!-- 数学アイコンたち -->
       <div class="icon-container">
-       <a href="3dRun2/index.html">
-        <img src="3dRun2/assets/3dRun2.png" alt="ゲームアイコン">
-       </a>
+        <a href="3dRun2/index.html">
+          <img src="3dRun2/assets/3dRun2.png" alt="ゲームアイコン">
+        </a>
       </div>
       <div class="icon-container">
-       <a href="Law-of-Sines/index.html">
-        <img src="Law-of-Sines/Law-of-Sines.png" alt="三角法アイコン">
-       </a>
-     </div>
+        <a href="Law-of-Sines/index.html">
+          <img src="Law-of-Sines/Law-of-Sines.png" alt="三角法アイコン">
+        </a>
+      </div>
     </div>
-    <!-- 他の数学系アイコンがあればここに追加 -->
   </div>
 
-  <!-- 下のグループ：便利ツールなど -->
-  <div style="text-align: center; margin-top: 60px;">
+  <!-- 右上：物理 -->
+  <div class="grid-item" id="physics">
+    <h2>〜 物理 〜</h2>
+    <div class="icon-row">
+      <div class="icon-container">
+        <a href="light/index.html">
+          <img src="light/light.png" alt="光線アイコン">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 左下：空白 -->
+  <div class="grid-item" id="empty"></div>
+
+  <!-- 右下：便利ツール -->
+  <div class="grid-item" id="tools">
     <h2>〜 便利ツール 〜</h2>
+    <div class="icon-row">
+      <div class="icon-container">
+        <a href="translation/translation.html">
+          <img src="translation/translation.png" alt="翻訳アイコン">
+        </a>
+      </div>
+      <div class="icon-container">
+        <a href="qrcode/qr.html">
+          <img src="qrcode/qr.png" alt="QRコードアイコン">
+        </a>
+      </div>
+      <div class="icon-container">
+        <a href="pdf-merge/index.html">
+          <img src="pdf-merge/pdf-merger.png" alt="PDF結合アイコン">
+        </a>
+      </div>
+    </div>
   </div>
-  <div class="icon-row">
-    <div class="icon-container">
-      <a href="translation/translation.html">
-        <img src="translation/translation.png" alt="翻訳アイコン">
-      </a>
-    </div>
-    <div class="icon-container">
-      <a href="qrcode/qr.html">
-        <img src="qrcode/qr.png" alt="QRコードアイコン">
-      </a>
-    </div>
-    <div class="icon-container">
-      <a href="pdf-merge/index.html">
-        <img src="pdf-merge/pdf-merger.png" alt="QRコードアイコン">
-      </a>
-    </div>
-  </div>
+</div>
+
 </body>
 
 </html>
