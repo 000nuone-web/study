@@ -39,7 +39,7 @@ function drawOpticalElements() {
   prismPath.lineTo(centerX, prismY - 50);
   prismPath.lineTo(centerX + 40, prismY + 100);
   prismPath.closePath();
-  ctx.fillStyle = "rgba(0, 255, 255, 0.3)";
+  ctx.fillStyle = "rgba(154, 230, 255, 1)";
   ctx.fill(prismPath);
 
   // 凹レンズ（くびれた形）
@@ -49,7 +49,7 @@ function drawOpticalElements() {
   concavePath.lineTo(centerX + 40, concaveY + 80);
   concavePath.bezierCurveTo(centerX + 10, concaveY + 40, centerX + 10, concaveY - 40, centerX + 40, concaveY - 80);
   concavePath.closePath();
-  ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+  ctx.fillStyle = "rgba(154, 230, 255, 1)";
   ctx.fill(concavePath);
 
   // 凸レンズ（上下とんがり）
@@ -58,7 +58,7 @@ function drawOpticalElements() {
   convexPath.bezierCurveTo(centerX - 40, convexY - 60, centerX - 40, convexY + 60, centerX, convexY + 80);
   convexPath.bezierCurveTo(centerX + 40, convexY + 60, centerX + 40, convexY - 60, centerX, convexY - 80);
   convexPath.closePath();
-  ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+  ctx.fillStyle = "rgba(154, 230, 255, 1)";
   ctx.fill(convexPath);
 }
 
