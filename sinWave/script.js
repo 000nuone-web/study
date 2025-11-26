@@ -213,12 +213,15 @@ function renderYX(tCurrent) {
   ctxYX.stroke();
 
   // --- ここから追加 ---
+// y軸のキャンバス座標を取得
+  const xZero = xToCanvas(0, w);
+
   // 縦の点線
   ctxYX.strokeStyle = "#4aaf51ff";
   ctxYX.setLineDash([6, 6]);
   ctxYX.beginPath();
-  ctxYX.moveTo(selectedX, 0);
-  ctxYX.lineTo(selectedX, h);
+  ctxYX.moveTo(xZero, 0);
+  ctxYX.lineTo(xZero, h);
   ctxYX.stroke();
   ctxYX.setLineDash([]);
 
@@ -227,7 +230,7 @@ function renderYX(tCurrent) {
 const yZero = yToCanvas(0, h); // 横軸のキャンバス座標
 ctxYX.fillStyle = '#12aa98ff';
 ctxYX.beginPath();
-ctxYX.arc(selectedX, yZero, 6, 0, 2 * Math.PI);
+ctxYX.arc(xZero, yZero, 6, 0, 2 * Math.PI);
 ctxYX.fill();
 
   // --- ここまで追加 ---
