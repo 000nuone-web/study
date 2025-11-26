@@ -1,0 +1,22 @@
+body {
+  background-color: #0f1120;
+  color: #ffffff;
+  font-family: sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+input[type="range"] {
+  width: 400px;
+  margin: 20px 0;
+}
+
+canvas {
+  width: 90vw;        /* 端末横幅の 90% に調整 */
+  max-width: 1000px;  /* 上限を設定して大画面でも広がりすぎないように */
+  height: 600px;      /* 高さは固定のまま */
+  border: 1px solid #333;
+  margin: 20px auto;  /* 中央寄せ */
+  display: block;     /* 横並びではなく中央に配置 */
+}
+
