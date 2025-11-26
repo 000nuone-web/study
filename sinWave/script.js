@@ -5,6 +5,9 @@ const yRangeMax = 1.1;
 const xMin = -Math.PI;
 const xMax = 3 * Math.PI;
 
+// スケール調整用係数を最初に宣言
+const scaleFactor = 0.5;
+
 const canvasYT = document.getElementById('canvasYT');
 const canvasYX = document.getElementById('canvasYX');
 const tRange   = document.getElementById('tRange');
@@ -48,7 +51,6 @@ function resizeCanvas() {
   fixCanvasDPI(canvasYT);
   fixCanvasDPI(canvasYX);
 
-  // 初期化時に selectedX を原点 (x=0) に対応するキャンバス座標にする
   if (selectedX === null) {
     selectedX = xToCanvas(0, canvasYX.width);
   }
@@ -61,20 +63,23 @@ resizeCanvas();
 
 // 座標変換
 function xToCanvas(x, w) {
-  const scale = w / (xMax - xMin)/2;
+  const scale = w / (xMax - xMin) * scaleFactor;
   return (x - xMin) * scale;
 }
 
 function yToCanvas(y, h) {
-  return (yRangeMax - y) / (yRangeMax - yRangeMin) * (h/2);
+  return (yRangeMax - y) / (yRangeMax - yRangeMin) * h * scaleFactor;
 }
 
-
 function tToCanvas(t, w) {
-  const scale = w / (tMax - tMin)/2;
+  const scale = w / (tMax - tMin) * scaleFactor;
   return (t - tMin) * scale;
 }
 
+function canvasXToMathX(canvasX, w) {
+  const scale = (xMax - xMin) / (w * scaleFactor);
+  return xMin + canvasX * scale;
+}
 
 // グリッド描画
 function drawGrid(ctx, w, h) {
@@ -103,42 +108,31 @@ function drawGrid(ctx, w, h) {
   ctx.strokeRect(0, 0, w, h);
 }
 
-
 // 軸描画
 function drawAxes(ctx, w, h, labelX) {
   ctx.strokeStyle = '#ffffff';
   ctx.lineWidth = 2;
 
-  // 縦軸 (x=0)
   const xZero = xToCanvas(0, w);
   ctx.beginPath();
   ctx.moveTo(xZero, 0);
   ctx.lineTo(xZero, h);
   ctx.stroke();
-
-  // 縦軸の矢印（上方向）
   drawArrow(ctx, xZero, h, xZero, 0);
 
-  // 横軸 (y=0)
   const yZero = yToCanvas(0, h);
   ctx.beginPath();
   ctx.moveTo(0, yZero);
   ctx.lineTo(w, yZero);
   ctx.stroke();
-
-  // 横軸の矢印（右方向）
   drawArrow(ctx, w/2-40, yZero, w/2, yZero);
 
-  // ラベル描画
   ctx.fillStyle = '#ffffff';
   ctx.font = '32px Arial';
-  ctx.fillText('y', xZero + 8, 22);       // 縦軸の上に y
-  ctx.fillText(labelX, xZero*3.93, yZero - 12);
+  ctx.fillText('y', xZero + 8, 22);
+  ctx.fillText(labelX, xZero*3.9, yZero - 12);
   ctx.fillText('O', xZero-30, yZero+30);
 }
-
-
-
 
 function drawArrow(ctx, x1, y1, x2, y2, headLength = 10) {
   ctx.beginPath();
@@ -157,13 +151,6 @@ function drawArrow(ctx, x1, y1, x2, y2, headLength = 10) {
   ctx.fillStyle = ctx.strokeStyle;
   ctx.fill();
 }
-
-function canvasXToMathX(canvasX, w) {
-  const scale = (xMax - xMin) / (w/2);
-  return xMin + canvasX * scale;
-}
-
-
 
 // y–t グラフ
 function renderYT(tCurrent) {
@@ -199,12 +186,10 @@ function renderYX(tCurrent) {
   ctxYX.beginPath();
 
   const steps = 1000;
-  const scale = w / (xMax - xMin);
-
   for (let i = 0; i <= steps; i++) {
     const x = xMin + (xMax - xMin) * (i / steps);
     const y = Math.sin(x - tCurrent);
-    const xCanvas = xToCanvas(x, w);   // ← getYAxisX を使わず直接変換
+    const xCanvas = xToCanvas(x, w);
     const yCanvas = yToCanvas(y, h);
 
     if (i === 0) ctxYX.moveTo(xCanvas, yCanvas);
@@ -212,29 +197,21 @@ function renderYX(tCurrent) {
   }
   ctxYX.stroke();
 
-  // --- ここから追加 ---
-// y軸のキャンバス座標を取得
-  const xZero = xToCanvas(0, w);
-
-  // 縦の点線
   ctxYX.strokeStyle = "#4aaf51ff";
   ctxYX.setLineDash([6, 6]);
   ctxYX.beginPath();
-  ctxYX.moveTo(xZero, 0);
-  ctxYX.lineTo(xZero, h);
+  ctxYX.moveTo(selectedX, 0);
+  ctxYX.lineTo(selectedX, h);
   ctxYX.stroke();
   ctxYX.setLineDash([]);
 
-
-// 赤い丸（横軸上に固定）
-const yZero = yToCanvas(0, h); // 横軸のキャンバス座標
-ctxYX.fillStyle = '#12aa98ff';
-ctxYX.beginPath();
-ctxYX.arc(xZero, yZero, 6, 0, 2 * Math.PI);
-ctxYX.fill();
-
-  // --- ここまで追加 ---
+  const yZero = yToCanvas(0, h);
+  ctxYX.fillStyle = '#12aa98ff';
+  ctxYX.beginPath();
+  ctxYX.arc(selectedX, yZero, 6, 0, 2 * Math.PI);
+  ctxYX.fill();
 }
+
 // 更新処理
 function update(t) {
   t = clamp(t, tMin, tMax);
@@ -259,19 +236,18 @@ tRange.addEventListener('input', (e) => {
 // ドラッグ操作
 canvasYX.addEventListener('mousedown', (e) => {
   const rect = canvasYX.getBoundingClientRect();
-  const xClick = (e.clientX - rect.left) / rect.width * canvasYX.width/2;
-  const yClick = (e.clientY - rect.top) / rect.height * canvasYX.height/2;
+  const xClick = (e.clientX - rect.left) / rect.width * canvasYX.width * scaleFactor;
+  const yClick = (e.clientY - rect.top) / rect.height * canvasYX.height * scaleFactor;
 
   const yZero = yToCanvas(0, canvasYX.height);
   const dist = Math.hypot(xClick - selectedX, yClick - yZero);
   if (dist < 10) dragging = true;
 });
 
-
 canvasYX.addEventListener('mousemove', (e) => {
   if (!dragging) return;
   const rect = canvasYX.getBoundingClientRect();
-  const xClick = (e.clientX - rect.left) / rect.width * canvasYX.width / 2;
+  const xClick = (e.clientX - rect.left) / rect.width * canvasYX.width * scaleFactor;
   selectedX = xClick;
   update(parseFloat(tRange.value));
 });
@@ -279,3 +255,4 @@ canvasYX.addEventListener('mousemove', (e) => {
 canvasYX.addEventListener('mouseup', () => {
   dragging = false;
 });
+
