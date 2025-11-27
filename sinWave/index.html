@@ -4,17 +4,6 @@
   <meta charset="UTF-8" />
   <title>Canvas Graph</title>
   <link rel="stylesheet" href="style.css" />
-
-  <!-- 追加: スマホで拡大縮小を禁止 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  
-  <style>
-    /* 追加: キャンバスでスクロールや選択を禁止 */
-    canvas {
-      touch-action: none;   /* スワイプでスクロールしない */
-      user-select: none;    /* テキスト選択を防ぐ */
-    }
-  </style>
 </head>
 <body>
   <div class="canvas-container">
@@ -22,19 +11,23 @@
     <canvas id="canvasYT"></canvas>
   </div>
 
-  <div style="display:flex; justify-content:center; align-items:center; gap:20px; height:12vh;">
-    <!-- 数字＋スライダーの縦並びセット -->
-    <div style="display:flex; flex-direction:column; align-items:center;">
-      <span id="tVal" style="margin-bottom:-20px;">0.00</span>
-      <input id="tRange" type="range" min="-3.14" max="9.42" step="0.01" value="0" style="width:200px;">
-    </div>
+<div style="display:flex; justify-content:center; align-items:center; gap:20px; height:12vh;">
+  
+  <!-- 数字＋スライダーの縦並びセット -->
+ <div style="display:flex; flex-direction:column; align-items:center;">
+  <span id="tVal" style="margin-bottom:-20px;">0.00</span>
+  <input id="tRange" type="range" min="-3.14" max="9.42" step="0.01" value="0" style="width:200px;">
+</div>
 
-    <!-- 三角ボタンの縦並びセット -->
-    <div style="display:flex; flex-direction:column; align-items:center;">
-      <button id="btnUp">△</button>
-      <button id="btnDown">▽</button>
-    </div>
+  <!-- 三角ボタンの縦並びセット -->
+  <div style="display:flex; flex-direction:column; align-items:center;">
+    <button id="btnUp">△</button>
+    <button id="btnDown">▽</button>
   </div>
+
+</div>
+
+
 
   <script src="script.js"></script>
 </body>
