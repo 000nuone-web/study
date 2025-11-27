@@ -22,14 +22,14 @@ let dragging  = false;
 const btnUp   = document.getElementById('btnUp');
 const btnDown = document.getElementById('btnDown');
 
-btnUp.addEventListener('click', () => {
+btnUp.addEventListener('pointerdown', () => {
   let t = parseFloat(tRange.value);
   t += 0.01;
   tRange.value = clamp(t, tMin, tMax);
   update(parseFloat(tRange.value));
 });
 
-btnDown.addEventListener('click', () => {
+btnDown.addEventListener('pointerdown', () => {
   let t = parseFloat(tRange.value);
   t -= 0.01;
   tRange.value = clamp(t, tMin, tMax);
