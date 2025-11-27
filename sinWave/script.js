@@ -234,7 +234,7 @@ tRange.addEventListener('input', (e) => {
 });
 
 // ドラッグ操作
-canvasYX.addEventListener('mousedown', (e) => {
+canvasYX.addEventListener('pointerdown', (e) => {
   const rect = canvasYX.getBoundingClientRect();
   const xClick = (e.clientX - rect.left) / rect.width * canvasYX.width * scaleFactor;
   const yClick = (e.clientY - rect.top) / rect.height * canvasYX.height * scaleFactor;
@@ -244,7 +244,7 @@ canvasYX.addEventListener('mousedown', (e) => {
   if (dist < 10) dragging = true;
 });
 
-canvasYX.addEventListener('mousemove', (e) => {
+canvasYX.addEventListener('pointermove', (e) => {
   if (!dragging) return;
   const rect = canvasYX.getBoundingClientRect();
   const xClick = (e.clientX - rect.left) / rect.width * canvasYX.width * scaleFactor;
@@ -252,7 +252,7 @@ canvasYX.addEventListener('mousemove', (e) => {
   update(parseFloat(tRange.value));
 });
 
-canvasYX.addEventListener('mouseup', () => {
+canvasYX.addEventListener('pointerup', () => {
   dragging = false;
 });
 
