@@ -158,22 +158,34 @@ function renderYT(tCurrent) {
   drawGrid(ctxYT, w, h);
   drawAxes(ctxYT, w, h, "t");
 
-  const xSelectedRad = canvasXToMathX(selectedX, canvasYX.width);
+  const xSelected = canvasXToMathX(selectedX, canvasYX.width);
 
   ctxYT.strokeStyle = '#7bd389';
   ctxYT.lineWidth = 3.5;
   ctxYT.beginPath();
 
   const steps = 1000;
+  let lastX = null, lastY = null;
+
   for (let i = 0; i <= steps; i++) {
-    const u = tMin + (tCurrent - tMin) * (i / steps);
+    const u = tMin + (tCurrent - tMin) * (i / steps); // ← tCurrent まで
     const x = tToCanvas(u, w);
-    const y = yToCanvas(Math.sin(xSelectedRad - u), h);
+    const y = yToCanvas(Math.sin(xSelected - u), h);
     if (i === 0) ctxYT.moveTo(x, y);
     else ctxYT.lineTo(x, y);
+    if (i === steps) { lastX = x; lastY = y; }
   }
   ctxYT.stroke();
+
+  // 終端（tCurrent）の点に丸
+  if (lastX !== null) {
+    ctxYT.fillStyle = '#aaff00';
+    ctxYT.beginPath();
+    ctxYT.arc(lastX, lastY, 7, 0, 2 * Math.PI);
+    ctxYT.fill();
+  }
 }
+
 
 // y–x グラフ
 function renderYX(tCurrent) {
@@ -210,6 +222,17 @@ function renderYX(tCurrent) {
   ctxYX.beginPath();
   ctxYX.arc(selectedX, yZero, 6, 0, 2 * Math.PI);
   ctxYX.fill();
+
+  // ★ 新しい丸（点線とグラフの交点）
+  const xMath = canvasXToMathX(selectedX, w);   // キャンバス座標→数値座標
+  const yMath = Math.sin(xMath - tCurrent);     // グラフの値
+  const yCanvas = yToCanvas(yMath, h);          // キャンバス座標に変換
+
+  ctxYX.fillStyle = '#aaff00'; // 黄緑
+  ctxYX.beginPath();
+  ctxYX.arc(selectedX, yCanvas, 7, 0, 2 * Math.PI);
+  ctxYX.fill();
+
 }
 
 // 更新処理
