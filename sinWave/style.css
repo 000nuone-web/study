@@ -20,9 +20,6 @@ body {
   background-color: #14182b;
 }
 
-#tRange {
-  margin-top: 40px;  /* 上に40pxの余白を追加 */
-}
 
 #canvasYX {
   touch-action: none;   /* タッチ操作でスクロールしない */
@@ -32,4 +29,39 @@ body {
 body {
   overflow-x: hidden;   /* 横スクロール禁止 */
   overscroll-behavior-x: none; /* スワイプで横に動かない */
+}
+
+#btnUp,
+#btnDown{
+  font-size: 1rem;
+  padding:10px 30px;
+  margin: 10px;
+}
+
+
+/* スライダー全体 */
+#tRange {
+  -webkit-appearance: none; /* デフォルトの見た目を消す */
+  appearance: none ;
+  width: 450px;
+  height: 10px;
+  margin-top: 40px;
+}
+
+/* バー部分（track） */
+#tRange::-webkit-slider-runnable-track {
+  height: 15px;
+  background: #9a4204;   /* バーの色を赤に */
+  border-radius: 0px;
+}
+
+/* つまみ部分（thumb） */
+#tRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 35px;
+  background: #d9eb15;      /* つまみの色 */
+  border-radius: 15%;
+  cursor: pointer;
+  margin-top: -10px;     /* バー中央に合わせるための調整 */
 }
