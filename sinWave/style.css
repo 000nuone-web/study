@@ -23,3 +23,13 @@ body {
 #tRange {
   margin-top: 40px;  /* 上に40pxの余白を追加 */
 }
+
+#canvasYX {
+  touch-action: none;   /* タッチ操作でスクロールしない */
+  user-select: none;    /* テキスト選択を防ぐ */
+}
+
+body {
+  overflow-x: hidden;   /* 横スクロール禁止 */
+  overscroll-behavior-x: none; /* スワイプで横に動かない */
+}
