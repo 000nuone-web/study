@@ -242,7 +242,7 @@ canvasYX.addEventListener('pointerdown', (e) => {
 
   const yZero = yToCanvas(0, canvasYX.height);
   const dist = Math.hypot(xClick - selectedX, yClick - yZero);
-  if (dist < 15) dragging = true;
+  if (dist < 30) dragging = true;
 });
 
 canvasYX.addEventListener('pointermove', (e) => {
