@@ -235,6 +235,7 @@ tRange.addEventListener('input', (e) => {
 
 // ドラッグ操作
 canvasYX.addEventListener('pointerdown', (e) => {
+  e.preventDefault(); // ←追加
   const rect = canvasYX.getBoundingClientRect();
   const xClick = (e.clientX - rect.left) / rect.width * canvasYX.width * scaleFactor;
   const yClick = (e.clientY - rect.top) / rect.height * canvasYX.height * scaleFactor;
@@ -246,6 +247,7 @@ canvasYX.addEventListener('pointerdown', (e) => {
 
 canvasYX.addEventListener('pointermove', (e) => {
   if (!dragging) return;
+  e.preventDefault(); // ←追加
   const rect = canvasYX.getBoundingClientRect();
   const xClick = (e.clientX - rect.left) / rect.width * canvasYX.width * scaleFactor;
   selectedX = xClick;
